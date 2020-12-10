@@ -34,18 +34,24 @@ class App extends Component {
   componentDidMount() {
     console.log("Hejsan");
     this.callBackendApi()
-      .then(res => this.setState({ data: res.express }))
+      .then(res => this.setState({ data: res }))
       .catch(error => console.log(error));
   };
 
   callBackendApi = async () => {
-    const response = await fetch('/');
+    const result = [];
+    const response = await fetch('/programs');
     const programs = await response.json();
-    console.log("Här är jag");
+    console.log("Här är jag" + programs);
+    //const programs = JSON.parse(data);
     if (response.status !== 200) {
       
-      throw Error(programs.message);
+      throw Error(response.message);
     };
+    /*for (var i in programs){
+      result.push(programs[i]);
+    };*/
+    console.log('RESULTATET: ' + result);
     return programs;
   };
 
@@ -70,3 +76,11 @@ class App extends Component {
 
 export default App;
 //<p>{this.state.data}</p>
+
+/*, {
+  headers : { 
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+   }
+
+}*/

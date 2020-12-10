@@ -1,11 +1,11 @@
-var programs = require('./programs.json');
+var programs = require('../public/programs.json');
 const express = require('express');
 const app = express();
 
 app.listen(5000, () => console.log("listening at 5000"));
 
-//app.use(express.static('./src/index.js'));
+//app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.json(programs);
+app.get('/programs', (req, res) => {
+    res.send(programs);
 });
