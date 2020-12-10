@@ -1,13 +1,11 @@
-const http = require("http");
-const host = 'localhost';
-const port = 3000;
+var programs = require('./programs.json');
+const express = require('express');
+const app = express();
 
-const programList = function (req, res) {
-    res.writeHead(200);
-    res.end("Hello World!");
-};
+app.listen(5000, () => console.log("listening at 5000"));
 
-const server = http.createServer(programList);
-server.listen(port, host, () => {
-    console.log("Server is running! ");
+//app.use(express.static('./src/index.js'));
+
+app.get('/', (req, res) => {
+    res.json(programs);
 });
